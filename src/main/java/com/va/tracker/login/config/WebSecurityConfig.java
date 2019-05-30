@@ -45,10 +45,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
           .csrf().disable()
           .authorizeRequests()
+          .antMatchers("/login*").permitAll() // comment for default spring login
           .anyRequest().authenticated()
           .and()
           .formLogin()
-          .defaultSuccessUrl("/home.html");
+          .loginPage("/login.html") // comment for default spring login
+          .loginProcessingUrl("/login") // comment for default spring login
+          .defaultSuccessUrl("/home.html", true);
     }
 
 }
